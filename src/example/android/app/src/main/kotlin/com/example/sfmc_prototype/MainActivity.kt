@@ -1,4 +1,4 @@
-package com.palmerbet.mobile.androiddev
+package com.sfmc.mobile.androiddev
 
 import io.flutter.embedding.android.FlutterActivity
 
