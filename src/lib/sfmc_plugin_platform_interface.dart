@@ -3,7 +3,6 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'sfmc_plugin_method_channel.dart';
 
 abstract class SfmcPluginPlatform extends PlatformInterface {
-
   SfmcPluginPlatform() : super(token: _token);
 
   static final Object _token = Object();
@@ -17,29 +16,30 @@ abstract class SfmcPluginPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<bool?> initialize({String? appId,
-    String? accessToken,
-    String? mid,
-    String? sfmcURL,
-    String? senderId,
-    bool? locationEnabled,
-    bool? inboxEnabled,
-    bool? analyticsEnabled,
-    bool? delayRegistration}) {
+  Future<bool?> initialize(
+      {String? appId,
+      String? accessToken,
+      String? mid,
+      String? sfmcURL,
+      String? senderId,
+      bool? locationEnabled,
+      bool? inboxEnabled,
+      bool? analyticsEnabled,
+      bool? delayRegistration}) {
     return _instance.initialize(
-        appId:appId,
-        accessToken:accessToken,
-        mid:mid,
-        sfmcURL:sfmcURL,
-        senderId:senderId,
-        locationEnabled:locationEnabled,
-        inboxEnabled:inboxEnabled,
-        analyticsEnabled:analyticsEnabled,
-        delayRegistration:delayRegistration
-    );
+        appId: appId,
+        accessToken: accessToken,
+        mid: mid,
+        sfmcURL: sfmcURL,
+        senderId: senderId,
+        locationEnabled: locationEnabled,
+        inboxEnabled: inboxEnabled,
+        analyticsEnabled: analyticsEnabled,
+        delayRegistration: delayRegistration);
   }
 
-  Future<bool?> setContactKey(String? contactKey) => _instance.setContactKey(contactKey);
+  Future<bool?> setContactKey(String? contactKey) =>
+      _instance.setContactKey(contactKey);
 
   Future<String?> getContactKey() => _instance.getContactKey();
 
@@ -51,6 +51,6 @@ abstract class SfmcPluginPlatform extends PlatformInterface {
   Future<List<String>> getTags() => _instance.getTags();
 
   // Push
-  Future<bool?> setPushEnabled(bool? enabled) => _instance.setPushEnabled(enabled);
-
+  Future<bool?> setPushEnabled(bool? enabled) =>
+      _instance.setPushEnabled(enabled);
 }

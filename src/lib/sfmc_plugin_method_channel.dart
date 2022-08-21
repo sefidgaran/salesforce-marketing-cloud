@@ -12,14 +12,14 @@ class MethodChannelSfmcPlugin extends SfmcPluginPlatform {
   @override
   Future<bool?> initialize(
       {String? appId,
-        String? accessToken,
-        String? mid,
-        String? sfmcURL,
-        String? senderId,
-        bool? locationEnabled,
-        bool? inboxEnabled,
-        bool? analyticsEnabled,
-        bool? delayRegistration}) async {
+      String? accessToken,
+      String? mid,
+      String? sfmcURL,
+      String? senderId,
+      bool? locationEnabled,
+      bool? inboxEnabled,
+      bool? analyticsEnabled,
+      bool? delayRegistration}) async {
     final bool? result = await methodChannel.invokeMethod('initialize', {
       "appId": appId,
       "accessToken": accessToken,
@@ -35,7 +35,7 @@ class MethodChannelSfmcPlugin extends SfmcPluginPlatform {
   }
 
   @override
-  Future<bool?> setContactKey(String? contactKey)async{
+  Future<bool?> setContactKey(String? contactKey) async {
     final bool? result = await methodChannel.invokeMethod('setContactKey', {
       "contactKey": contactKey,
     });
@@ -44,14 +44,14 @@ class MethodChannelSfmcPlugin extends SfmcPluginPlatform {
   }
 
   @override
-  Future<String?> getContactKey() async{
+  Future<String?> getContactKey() async {
     final String? result = await methodChannel.invokeMethod('getContactKey');
 
     return result;
   }
 
   @override
-  Future<bool?> addTag(String? tag)async{
+  Future<bool?> addTag(String? tag) async {
     final bool? result = await methodChannel.invokeMethod('addTag', {
       "tag": tag,
     });
@@ -60,7 +60,7 @@ class MethodChannelSfmcPlugin extends SfmcPluginPlatform {
   }
 
   @override
-  Future<bool?> removeTag(String? tag) async{
+  Future<bool?> removeTag(String? tag) async {
     final bool? result = await methodChannel.invokeMethod('removeTag', {
       "tag": tag,
     });
@@ -69,16 +69,16 @@ class MethodChannelSfmcPlugin extends SfmcPluginPlatform {
   }
 
   @override
-  Future<List<String>> getTags()async{
+  Future<List<String>> getTags() async {
     final List<String> result = await methodChannel.invokeMethod('getTags');
 
     return result;
   }
 
   @override
-  Future<bool?> setPushEnabled(bool? enabled)async{
+  Future<bool?> setPushEnabled(bool? enabled) async {
     final bool? result = await methodChannel.invokeMethod('setPushEnabled', {
-    "isEnabled": enabled ?? true,
+      "isEnabled": enabled ?? true,
     });
 
     return result;

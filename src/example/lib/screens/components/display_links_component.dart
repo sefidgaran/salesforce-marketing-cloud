@@ -22,7 +22,7 @@ class _DisplayLinksComponentState extends State<DisplayLinksComponent> {
     }
   }
 
-  void _handleIncomingUrl(){
+  void _handleIncomingUrl() {
     incomingUrlStreamSubscription = uriLinkStream.listen((Uri? uri) {
       setState(() {
         text = uri.toString();
