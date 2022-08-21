@@ -31,9 +31,7 @@ dependencies:
 ...
 ```
 
-## Getting Started
-
-# Setup Android 
+## Setup Android 
 Create an app in MobilePush. This process connects the device to the MobilePush app you created previously in [MobilePush](https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/create-apps/create-apps-overview.html).
 
 Note: The Android SDK requires Android API 21 or greater and has dependencies on the Android Support v4 and Google Play Services libraries.
