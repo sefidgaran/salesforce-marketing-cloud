@@ -65,7 +65,7 @@ dependencies {
 ```
 
 Note: Don't forget to add your Firebase google-services.json to your android/app folder and initialize Firebase in your Flutter project.
-[Example](https://github.com/sefidgaran/salesforce-marketing-cloud/src/example):
+[Example](https://github.com/sefidgaran/salesforce-marketing-cloud/tree/main/src/example):
 ```dart
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -82,16 +82,17 @@ Note: Please follow the [Provision for Push](https://salesforce-marketingcloud.g
 
 ## Use Flutter Plugin
 
-The first step is initializing the SFMC plugin with credential information, then setting the contact key as a unique key which is already available in SFMC panel. 
+The first step is initializing the SFMC plugin with credential information. 
+[Learn more](https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/create-apps/create-apps-overview.html)
 
 ```dart
-var isInitialized = await SfmcPlugin().initialize(
-        appId: '<your appId>',
-        accessToken: '<your access token>',
-        mid: '<your mid>',
+    var isInitialized = await SfmcPlugin().initialize(
+        appId: '<YOUR_APP_ID>',
+        accessToken: '<YOUR_ACCESS_TOKEN>',
+        mid: '<YOUR_MID>',
         sfmcURL:
-            '<your sfmc url>',
-        senderId: '<your firebase sender id>',
+            '<YOUR_SFMC_URL>',
+        senderId: '<YOUR_FIREBASE_CLOUD_MESSAGING_SENDER_ID>',
         locationEnabled: false,
         inboxEnabled: false,
         analyticsEnabled: true,
@@ -101,5 +102,9 @@ var isInitialized = await SfmcPlugin().initialize(
 The second step is setting your sfmc contact key which is a unique client id in Salesforce Marketing Cloud.
 
 ```dart
-await SfmcPlugin().setContactKey('<unique contact key>');
+await SfmcPlugin().setContactKey('<Uniquely Identifying Key>');
 ```
+
+## Contributions
+Feel free to contribute to this project.
+
