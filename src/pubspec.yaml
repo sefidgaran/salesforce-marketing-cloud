@@ -1,7 +1,7 @@
 name: sfmc_plugin
 description: Salesforce Marketing Cloud - MobilePush SDK for Flutter.
 version: 0.0.1
-homepage:
+homepage: https://github.com/sefidgaran/salesforce-marketing-cloud
 
 environment:
   sdk: ">=2.17.6 <3.0.0"
