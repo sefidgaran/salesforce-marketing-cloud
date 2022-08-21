@@ -50,7 +50,7 @@ class _ContactKeyComponentState extends State<ContactKeyComponent> {
           if (hasPredefinedContactKey)
             Wrap(
               children: [
-                const Text("You've already set a contact key, which is : "),
+                const Text("You've set a contact key, which is : "),
                 Text(predefinedContactKey!,
                     style: const TextStyle(
                         color: Colors.green, fontWeight: FontWeight.w500))
