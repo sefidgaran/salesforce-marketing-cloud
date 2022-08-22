@@ -1,6 +1,7 @@
 import 'sfmc_plugin_platform_interface.dart';
 
 class SfmcPlugin {
+  /// To Initialize the SDK
   Future<bool?> initialize(
       {String? appId,
       String? accessToken,
@@ -23,22 +24,25 @@ class SfmcPlugin {
         delayRegistration: delayRegistration);
   }
 
-  // Contact key
+  /// To Set Contact Key
   Future<bool?> setContactKey(String? contactKey) =>
       SfmcPluginPlatform.instance.setContactKey(contactKey);
 
+  /// To Get Contact Key
   Future<String?> getContactKey() =>
       SfmcPluginPlatform.instance.getContactKey();
 
-  // Tags
+  /// To Add Tags
   Future<bool?> addTag(String? tag) => SfmcPluginPlatform.instance.addTag(tag);
 
+  /// To Remove Tags
   Future<bool?> removeTag(String? tag) =>
       SfmcPluginPlatform.instance.removeTag(tag);
 
+  /// To Get Tags
   Future<List<String>> getTags() => SfmcPluginPlatform.instance.getTags();
 
-  //Push
+  /// To Enable/Disable Push Notification
   Future<bool?> setPushEnabled(bool? enabled) async =>
       SfmcPluginPlatform.instance.setPushEnabled(enabled);
 }

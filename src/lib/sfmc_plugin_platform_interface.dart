@@ -16,6 +16,7 @@ abstract class SfmcPluginPlatform extends PlatformInterface {
     _instance = instance;
   }
 
+  /// To Initialize the SDK
   Future<bool?> initialize(
       {String? appId,
       String? accessToken,
@@ -38,19 +39,23 @@ abstract class SfmcPluginPlatform extends PlatformInterface {
         delayRegistration: delayRegistration);
   }
 
+  /// To Set Contact Key
   Future<bool?> setContactKey(String? contactKey) =>
       _instance.setContactKey(contactKey);
 
+  /// To Get Contact Key
   Future<String?> getContactKey() => _instance.getContactKey();
 
-  //Tags
+  /// To Add Tags
   Future<bool?> addTag(String? tag) => _instance.addTag(tag);
 
+  /// To Remove Tags
   Future<bool?> removeTag(String? tag) => _instance.removeTag(tag);
 
+  /// To Get Tags
   Future<List<String>> getTags() => _instance.getTags();
 
-  // Push
+  /// To Enable/Disable Push Notification
   Future<bool?> setPushEnabled(bool? enabled) =>
       _instance.setPushEnabled(enabled);
 }
