@@ -10,11 +10,11 @@ This SFMC Flutter Plugin includes:
 
 * Push Notifications
 
-Create a message using one of the templates in Marketing Cloud MobilePush or the Push Notification template in Content Builder or Journey Builder.
+    Create a message using one of the templates in Marketing Cloud MobilePush or the Push Notification template in Content Builder or Journey Builder.
 
 * In-App Messages
 
-In-app messages allow you to interact with your mobile app users while they use your mobile app, which is when they are most engaged. Trigger a message to show in your mobile app when a user opens the app on their device. While you can send this message to all of a contact’s devices, it only shows on the first device that opens the app. In-app messages can’t be created in MobilePush.
+    In-app messages allow you to interact with your mobile app users while they use your mobile app, which is when they are most engaged. Trigger a message to show in your mobile app when a user opens the app on their device. While you can send this message to all of a contact’s devices, it only shows on the first device that opens the app. In-app messages can’t be created in MobilePush.
 
 Learn more about SFMC Mobile Push SDK: 
 * [SFMC SDK Android](https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/)
@@ -39,12 +39,7 @@ Create an app in MobilePush. This process connects the device to the MobilePush 
 Note: The Android SDK requires Android API 21 or greater and has dependencies on the Android Support v4 and Google Play Services libraries.
 
 ### Set up Firebase
-Follow the [Android Firebase setup](https://firebase.google.com/docs/android/setup) documentation. When you add the Firebase core dependency to your module gradle file, use:
-```java
-dependencies {
-  implementation platform('com.google.firebase:firebase-bom:30.3.0')
-}
-```
+Follow the [Android Firebase setup](https://firebase.google.com/docs/android/setup) documentation.
 
 Add google-service plugin to your android/app/build.gradle:
 ```java
@@ -58,7 +53,7 @@ dependencies {
 }
 ```
 
-Note: Don't forget to add your Firebase google-services.json to your android/app folder.
+And please don't forget to add your Firebase google-services.json to your android/app folder.
 
 # Setup iOS 
 
