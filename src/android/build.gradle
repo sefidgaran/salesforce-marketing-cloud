@@ -19,7 +19,6 @@ rootProject.allprojects {
         google()
         mavenCentral()
         maven { url "https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/repository" }
-
     }
 }
 
@@ -50,4 +49,5 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.salesforce.marketingcloud:marketingcloudsdk:8.0.6'
+    implementation platform('com.google.firebase:firebase-bom:30.3.0')
 }

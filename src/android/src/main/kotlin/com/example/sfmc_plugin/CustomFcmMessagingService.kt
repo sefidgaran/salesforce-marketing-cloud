@@ -99,7 +99,7 @@ class CustomFcmMessagingService : FirebaseMessagingService() {
                                     context,
                                     Random().nextInt(),
                                     Intent(Intent.ACTION_VIEW, Uri.parse(notificationMessage.url)),
-                                    PendingIntent.FLAG_UPDATE_CURRENT
+                                    PendingIntent.FLAG_IMMUTABLE
                                 ),
                             )
                             builder.setAutoCancel(true)
@@ -110,7 +110,7 @@ class CustomFcmMessagingService : FirebaseMessagingService() {
                             context,
                             Random().nextInt(),
                             Intent(Intent.ACTION_VIEW, Uri.parse(url)),
-                            PendingIntent.FLAG_UPDATE_CURRENT
+                            PendingIntent.FLAG_IMMUTABLE
                         )
                     })
 

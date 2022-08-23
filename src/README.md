@@ -9,9 +9,11 @@ Marketing Cloud MobilePush lets you create and send notifications to encourage u
 This SFMC Flutter Plugin includes:
 
 * Push Notifications
+
 Create a message using one of the templates in Marketing Cloud MobilePush or the Push Notification template in Content Builder or Journey Builder.
 
 * In-App Messages
+
 In-app messages allow you to interact with your mobile app users while they use your mobile app, which is when they are most engaged. Trigger a message to show in your mobile app when a user opens the app on their device. While you can send this message to all of a contact’s devices, it only shows on the first device that opens the app. In-app messages can’t be created in MobilePush.
 
 Learn more about SFMC Mobile Push SDK: 
@@ -36,27 +38,7 @@ Create an app in MobilePush. This process connects the device to the MobilePush 
 
 Note: The Android SDK requires Android API 21 or greater and has dependencies on the Android Support v4 and Google Play Services libraries.
 
-Prerequisites
-
-1. Implement the SDK
-
-* Update module-level build.gradle file
-
-Add the SDK repository:
-```java
-repositories {
-  maven { url "https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/repository" }
-}
-```
-
-Add the SDK dependency:
-```java
-dependencies {
-  implementation 'com.salesforce.marketingcloud:marketingcloudsdk:8.0.6'
-}
-```
-
-2. Set up Firebase
+### Set up Firebase
 Follow the [Android Firebase setup](https://firebase.google.com/docs/android/setup) documentation. When you add the Firebase core dependency to your module gradle file, use:
 ```java
 dependencies {
@@ -64,17 +46,19 @@ dependencies {
 }
 ```
 
-Note: Don't forget to add your Firebase google-services.json to your android/app folder and initialize Firebase in your Flutter project.
-[Example](https://github.com/sefidgaran/salesforce-marketing-cloud/tree/main/src/example):
-```dart
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  if (Platform.isAndroid) {
-    await Firebase.initializeApp();
-  }
-  runApp(const MyApp());
+Add google-service plugin to your android/app/build.gradle:
+```java
+apply plugin: 'com.google.gms.google-services'
+```
+
+Add google-services dependency to android/build.gradle:
+```java
+dependencies {
+  classpath 'com.google.gms:google-services:4.3.13'
 }
 ```
+
+Note: Don't forget to add your Firebase google-services.json to your android/app folder.
 
 # Setup iOS 
 
@@ -104,7 +88,10 @@ The second step is setting your sfmc contact key which is a unique client id in 
 ```dart
 await SfmcPlugin().setContactKey('<Uniquely Identifying Key>');
 ```
+Learn more by take a look into the provided [Example](https://github.com/sefidgaran/salesforce-marketing-cloud/tree/main/src/example).
 
 ## Contributions
+
+🍺 Pull requests are welcome!
 Feel free to contribute to this project.
 
