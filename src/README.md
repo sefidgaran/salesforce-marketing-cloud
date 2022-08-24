@@ -20,18 +20,11 @@ Learn more about SFMC Mobile Push SDK:
 * [SFMC SDK Android](https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/)
 * [SFMC SDK iOS](https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/)
 
-## Install
+# Let's get started #
 
-Add `sfmc_plugin` to your `pubspec.yaml` dependencies:
-```yaml
-...
-dependencies:
-  flutter:
-    sdk: flutter
+First of all you need to add sfmc_plugin in your project. In order to do that, follow [this guide](https://pub.dev/packages/sfmc_plugin/install).
 
-  sfmc_plugin:
-...
-```
+We suggest you to check [example](https://github.com/sefidgaran/salesforce-marketing-cloud/tree/main/src/example) source code.
 
 ## Setup Android 
 Create an app in MobilePush. This process connects the device to the MobilePush app you created previously in [MobilePush](https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/create-apps/create-apps-overview.html).
@@ -44,16 +37,16 @@ Follow the [Android Firebase setup](https://firebase.google.com/docs/android/set
 #### And your Firebase google-services.json to your android/app folder.
 
 #### Add google-services plugin to your android/app/build.gradle:
-    ```java
-      apply plugin: 'com.google.gms.google-services'
-    ```
+```java
+  apply plugin: 'com.google.gms.google-services'
+```
 
 #### Add google-services dependency to android/build.gradle:
-    ```java
-    dependencies {
-      classpath 'com.google.gms:google-services:4.3.13'
-    }
-    ```
+```java
+  dependencies {
+    classpath 'com.google.gms:google-services:4.3.13'
+  }
+```
 
 ## Setup iOS 
 
@@ -83,7 +76,6 @@ The second step is setting your sfmc contact key which is a unique client id in 
 ```dart
 await SfmcPlugin().setContactKey('<Uniquely Identifying Key>');
 ```
-Learn more by take a look into the provided [Example](https://github.com/sefidgaran/salesforce-marketing-cloud/tree/main/src/example).
 
 ## Contributions
 

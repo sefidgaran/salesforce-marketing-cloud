@@ -1,3 +1,7 @@
+## 1.0.5
+
+* Update Readme
+  
 ## 1.0.4
 
 * Remove redundant from project.pbxproj in example
