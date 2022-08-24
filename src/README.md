@@ -41,23 +41,23 @@ Note: The Android SDK requires Android API 21 or greater and has dependencies on
 ### Set up Firebase
 Follow the [Android Firebase setup](https://firebase.google.com/docs/android/setup) documentation.
 
-And your Firebase google-services.json to your android/app folder.
+#### And your Firebase google-services.json to your android/app folder.
 
-Add google-service plugin to your android/app/build.gradle:
-```java
-apply plugin: 'com.google.gms.google-services'
-```
+#### Add google-services plugin to your android/app/build.gradle:
+    ```java
+      apply plugin: 'com.google.gms.google-services'
+    ```
 
-Add google-services dependency to android/build.gradle:
-```java
-dependencies {
-  classpath 'com.google.gms:google-services:4.3.13'
-}
-```
+#### Add google-services dependency to android/build.gradle:
+    ```java
+    dependencies {
+      classpath 'com.google.gms:google-services:4.3.13'
+    }
+    ```
 
-# Setup iOS 
+## Setup iOS 
 
-Note: Please follow the [Provision for Push](https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/get-started/get-started-provision.html) and use the Flutter plugin.
+Please follow the [Provision for Push](https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/get-started/get-started-provision.html).
 
 ## Use Flutter Plugin
 
@@ -88,5 +88,5 @@ Learn more by take a look into the provided [Example](https://github.com/sefidga
 ## Contributions
 
 🍺 Pull requests are welcome!
-Feel free to contribute to this project.
 
+Feel free to contribute to this project.
