@@ -1,3 +1,9 @@
+## 1.0.3
+
+* Remove redundant from project.pbxproj in example
+* Move home screen widget to main.dart in example
+* Update Readme
+
 ## 1.0.2
 
 * Update readme

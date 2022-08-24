@@ -41,6 +41,8 @@ Note: The Android SDK requires Android API 21 or greater and has dependencies on
 ### Set up Firebase
 Follow the [Android Firebase setup](https://firebase.google.com/docs/android/setup) documentation.
 
+And your Firebase google-services.json to your android/app folder.
+
 Add google-service plugin to your android/app/build.gradle:
 ```java
 apply plugin: 'com.google.gms.google-services'
@@ -52,8 +54,6 @@ dependencies {
   classpath 'com.google.gms:google-services:4.3.13'
 }
 ```
-
-And please don't forget to add your Firebase google-services.json to your android/app folder.
 
 # Setup iOS 
 
