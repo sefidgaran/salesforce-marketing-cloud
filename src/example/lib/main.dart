@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sfmc_plugin/sfmc_plugin.dart';
 import 'package:sfmc_prototype/screens/components/contact_key_component.dart';
-import 'package:sfmc_prototype/screens/components/display_links_component.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -72,7 +71,6 @@ class _MyHomePageState extends State<MyHomePage> {
           const SizedBox(
             height: 15,
           ),
-          DisplayLinksComponent(),
           if (initSucceeded) const ContactKeyComponent(),
         ],
       ),

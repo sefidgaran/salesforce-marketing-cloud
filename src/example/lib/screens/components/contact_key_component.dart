@@ -80,7 +80,7 @@ class _ContactKeyComponentState extends State<ContactKeyComponent> {
               },
               child: const Text("Submit")),
           Text(
-            "It might takes up to 10-20 minutes to set the contact key for the first time",
+            "It might take up to 10-20 minutes to set the contact key for the first time",
             style: TextStyle(
                 color: Colors.red.shade800,
                 fontSize: 12,
