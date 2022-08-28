@@ -43,7 +43,7 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 23
         buildConfigField "String", "MC_APP_ID", MC_APP_ID
         buildConfigField "String", "MC_ACCESS_TOKEN", MC_ACCESS_TOKEN
         buildConfigField "String", "MC_SENDER_ID", MC_SENDER_ID
