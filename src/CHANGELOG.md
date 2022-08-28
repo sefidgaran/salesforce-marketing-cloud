@@ -1,3 +1,8 @@
+## 2.0.0
+
+* Update Readme
+* Refactor Android SFMC SDK initialization
+  
 ## 1.0.5
 
 * Update Readme

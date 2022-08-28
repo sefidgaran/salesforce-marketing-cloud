@@ -47,17 +47,27 @@ Follow the [Android Firebase setup](https://firebase.google.com/docs/android/set
     classpath 'com.google.gms:google-services:4.3.13'
   }
 ```
+## Initialize SFMC SDK in Android
 
+Please update android/gradle.properties as example below:
+```java
+MC_APP_ID="<YOUR_SFMC_APP_ID>"
+MC_ACCESS_TOKEN="<YOUR_SFMC_ACCESS_TOKEN>"
+MC_SENDER_ID="<YOUR_FIREBASE_CLOUD_MESSAGING_SENDER_ID_FOR_SFMC>"
+MC_MID="<YOUR_SFMC_MID>"
+MC_SERVER_URL="<YOUR_SFMC_URL>"
+```
 ## Setup iOS 
 
 Please follow the [Provision for Push](https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/get-started/get-started-provision.html).
 
 ## Use Flutter Plugin
 
-The first step is initializing the SFMC plugin with credential information. 
-[Learn more](https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/create-apps/create-apps-overview.html)
+The first step is initializing the SFMC plugin with credential information (applies to iOS only, for Android please refer to setup Android section). 
+[Learn more](https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/get-started/get-started-setupapps.html)
 
 ```dart
+    /// iOS only
     var isInitialized = await SfmcPlugin().initialize(
         appId: '<YOUR_APP_ID>',
         accessToken: '<YOUR_ACCESS_TOKEN>',
@@ -65,9 +75,6 @@ The first step is initializing the SFMC plugin with credential information.
         sfmcURL:
             '<YOUR_SFMC_URL>',
         senderId: '<YOUR_FIREBASE_CLOUD_MESSAGING_SENDER_ID>',
-        locationEnabled: false,
-        inboxEnabled: false,
-        analyticsEnabled: true,
         delayRegistration: true);
 ```
 
