@@ -20,9 +20,6 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
             let accessToken = args["accessToken"] as? String
             let mid = args["mid"] as? String
             let sfmcURL = args["sfmcURL"] as? String
-            let locationEnabled = args["locationEnabled"] as? Bool
-            let inboxEnabled = args["inboxEnabled"] as? Bool
-            let analyticsEnabled = args["analyticsEnabled"] as? Bool
             let delayRegistration = args["delayRegistration"] as? Bool
             
             if appId == nil || accessToken == nil || mid == nil || sfmcURL == nil {
@@ -35,9 +32,6 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
                 accessToken: accessToken!,
                 mid: mid!,
                 sfmcURL: sfmcURL!,
-                locationEnabled: locationEnabled,
-                inboxEnabled: inboxEnabled,
-                analyticsEnabled: analyticsEnabled,
                 delayRegistration: delayRegistration,
                 onDone: { sfmcResult, message, code in
                     if (sfmcResult) {
@@ -81,7 +75,7 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
         }
     }
     
-    public func setupSFMC(appId: String, accessToken: String, mid: String, sfmcURL: String, locationEnabled: Bool?, inboxEnabled: Bool?, analyticsEnabled: Bool?, delayRegistration: Bool?, onDone: (_ result: Bool, _ message: String?, _ code: Int?) -> Void) {
+    public func setupSFMC(appId: String, accessToken: String, mid: String, sfmcURL: String, delayRegistration: Bool?, onDone: (_ result: Bool, _ message: String?, _ code: Int?) -> Void) {
         var success : Bool = false
         MarketingCloudSDK.sharedInstance().sfmc_tearDown()
         
@@ -91,9 +85,6 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
             .sfmc_setMarketingCloudServerUrl(sfmcURL)
             .sfmc_setMid(mid)
             .sfmc_setDelayRegistration(untilContactKeyIsSet: (delayRegistration ?? false) as NSNumber)
-            .sfmc_setInboxEnabled((inboxEnabled ?? true) as NSNumber)
-            .sfmc_setLocationEnabled((locationEnabled ?? true)  as NSNumber)
-            .sfmc_setAnalyticsEnabled((analyticsEnabled ?? true)  as NSNumber)
             .sfmc_build()!
         
         MarketingCloudSDK.sharedInstance().sfmc_setURLHandlingDelegate(self)

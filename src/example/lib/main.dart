@@ -43,9 +43,6 @@ class _MyHomePageState extends State<MyHomePage> {
         mid: '<YOUR_MID>',
         sfmcURL: '<YOUR_SFMC_URL>',
         senderId: '<YOUR_FIREBASE_CLOUD_MESSAGING_SENDER_ID>',
-        locationEnabled: false,
-        inboxEnabled: false,
-        analyticsEnabled: true,
         delayRegistration: true);
 
     setState(() {

@@ -23,9 +23,6 @@ abstract class SfmcPluginPlatform extends PlatformInterface {
       String? mid,
       String? sfmcURL,
       String? senderId,
-      bool? locationEnabled,
-      bool? inboxEnabled,
-      bool? analyticsEnabled,
       bool? delayRegistration}) {
     return _instance.initialize(
         appId: appId,
@@ -33,9 +30,6 @@ abstract class SfmcPluginPlatform extends PlatformInterface {
         mid: mid,
         sfmcURL: sfmcURL,
         senderId: senderId,
-        locationEnabled: locationEnabled,
-        inboxEnabled: inboxEnabled,
-        analyticsEnabled: analyticsEnabled,
         delayRegistration: delayRegistration);
   }
 

@@ -8,9 +8,6 @@ class SfmcPlugin {
       String? mid,
       String? sfmcURL,
       String? senderId,
-      bool? locationEnabled,
-      bool? inboxEnabled,
-      bool? analyticsEnabled,
       bool? delayRegistration}) {
     return SfmcPluginPlatform.instance.initialize(
         appId: appId,
@@ -18,9 +15,6 @@ class SfmcPlugin {
         mid: mid,
         sfmcURL: sfmcURL,
         senderId: senderId,
-        locationEnabled: locationEnabled,
-        inboxEnabled: inboxEnabled,
-        analyticsEnabled: analyticsEnabled,
         delayRegistration: delayRegistration);
   }
 

@@ -16,9 +16,6 @@ class MethodChannelSfmcPlugin extends SfmcPluginPlatform {
       String? mid,
       String? sfmcURL,
       String? senderId,
-      bool? locationEnabled,
-      bool? inboxEnabled,
-      bool? analyticsEnabled,
       bool? delayRegistration}) async {
     final bool? result = await methodChannel.invokeMethod('initialize', {
       "appId": appId,
@@ -26,9 +23,6 @@ class MethodChannelSfmcPlugin extends SfmcPluginPlatform {
       "mid": mid,
       "sfmcURL": sfmcURL,
       "senderId": senderId,
-      "locationEnabled": locationEnabled,
-      "inboxEnabled": inboxEnabled,
-      "analyticsEnabled": analyticsEnabled,
       "delayRegistration": delayRegistration,
     });
     return result;
