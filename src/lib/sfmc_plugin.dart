@@ -1,7 +1,7 @@
 import 'sfmc_plugin_platform_interface.dart';
 
 class SfmcPlugin {
-  /// To Initialize the SDK
+  /// To Initialize the SDK for iOS only
   Future<bool?> initialize(
       {String? appId,
       String? accessToken,

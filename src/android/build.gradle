@@ -3,6 +3,7 @@ version '1.0-SNAPSHOT'
 
 buildscript {
     ext.kotlin_version = '1.6.10'
+    ext.marketingcloudsdk_version = '8.0.+'
     repositories {
         google()
         mavenCentral()
@@ -42,12 +43,17 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
+        buildConfigField "String", "MC_APP_ID", MC_APP_ID
+        buildConfigField "String", "MC_ACCESS_TOKEN", MC_ACCESS_TOKEN
+        buildConfigField "String", "MC_SENDER_ID", MC_SENDER_ID
+        buildConfigField "String", "MC_MID", MC_MID
+        buildConfigField "String", "MC_SERVER_URL", MC_SERVER_URL
     }
 }
 
 dependencies {
+    implementation ("com.salesforce.marketingcloud:marketingcloudsdk:$marketingcloudsdk_version")
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.salesforce.marketingcloud:marketingcloudsdk:8.0.6'
-    implementation platform('com.google.firebase:firebase-bom:30.3.0')
+    implementation 'com.google.firebase:firebase-messaging:20.1.2'
 }

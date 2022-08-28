@@ -16,7 +16,7 @@ abstract class SfmcPluginPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  /// To Initialize the SDK
+  /// To Initialize the SDK for iOS only
   Future<bool?> initialize(
       {String? appId,
       String? accessToken,
