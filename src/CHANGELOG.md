@@ -1,3 +1,7 @@
+## 2.0.1
+
+* Set iOS platform version to 10
+
 ## 2.0.0
 
 * Update Readme

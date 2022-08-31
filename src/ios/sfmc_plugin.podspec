@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'sfmc_plugin'
-  s.version          = '0.0.1'
+  s.version          = '2.0.1'
   s.summary          = 'SFMC Flutter plugin project.'
   s.description      = <<-DESC
   MarketingCloudSDK - MobilePush SDK for Flutter.
@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
   s.dependency 'MarketingCloudSDK', '~> 7.6'
-  s.platform = :ios, '11.0'
+  s.platform = :ios, '10.0'
 
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
