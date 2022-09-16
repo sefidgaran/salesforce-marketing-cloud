@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sfmc_plugin/sfmc_plugin.dart';
 import 'package:sfmc_prototype/screens/components/contact_key_component.dart';
 
@@ -30,12 +31,22 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+Future handler(MethodCall methodCall) async {
+  switch (methodCall.method) {
+    case 'handle_url':
+      var url = methodCall.arguments['url'];
+      // the url is accessible here and can be processed
+      return null;
+  }
+}
+
 class _MyHomePageState extends State<MyHomePage> {
   bool? initStatus;
 
   late TextEditingController tagController = TextEditingController();
 
   void onInit() async {
+    SfmcPlugin().setHandler(handler);
     var isInitialized = await SfmcPlugin().initialize(
         appId: '<YOUR_APP_ID>',
         accessToken: '<YOUR_ACCESS_TOKEN>',

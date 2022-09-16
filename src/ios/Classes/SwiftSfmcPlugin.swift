@@ -5,12 +5,12 @@ import Foundation
 
 public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandlingDelegate, MarketingCloudSDKEventDelegate {
     
-    static var chanel:FlutterMethodChannel?
+    static var channel:FlutterMethodChannel?
 
     public static func register(with registrar: FlutterPluginRegistrar) {
-        chanel = FlutterMethodChannel(name: "sfmc_plugin", binaryMessenger: registrar.messenger())
+        channel = FlutterMethodChannel(name: "sfmc_plugin", binaryMessenger: registrar.messenger())
         let instance = SwiftSfmcPlugin()
-        registrar.addMethodCallDelegate(instance, channel: chanel!)
+        registrar.addMethodCallDelegate(instance, channel: channel!)
         registrar.addApplicationDelegate(instance)
     }
 
@@ -161,7 +161,7 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
      */
 
     public func sfmc_handle(_ url: URL, type: String) {
-        SwiftSfmcPlugin.chanel!.invokeMethod("handle_url" , arguments:  [ "url":url.absoluteString])
+        SwiftSfmcPlugin.channel!.invokeMethod("handle_url" , arguments:  [ "url":url.absoluteString])
     }
     
     /*
