@@ -1,4 +1,5 @@
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+import 'package:flutter/services.dart';
 
 import 'sfmc_plugin_method_channel.dart';
 
@@ -32,6 +33,9 @@ abstract class SfmcPluginPlatform extends PlatformInterface {
         senderId: senderId,
         delayRegistration: delayRegistration);
   }
+
+  setHandler(Future<dynamic> Function(MethodCall call)? handler) =>
+      _instance.setHandler(handler);
 
   /// To Set Contact Key
   Future<bool?> setContactKey(String? contactKey) =>
