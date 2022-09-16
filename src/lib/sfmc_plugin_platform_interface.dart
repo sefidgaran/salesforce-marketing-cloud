@@ -34,6 +34,7 @@ abstract class SfmcPluginPlatform extends PlatformInterface {
         delayRegistration: delayRegistration);
   }
 
+  /// (Applicable to iOS only - pass URL to Flutter through 'handle_url' methodCall.method - refer to example)
   setHandler(Future<dynamic> Function(MethodCall call)? handler) =>
       _instance.setHandler(handler);
 

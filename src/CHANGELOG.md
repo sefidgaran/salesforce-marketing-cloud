@@ -1,3 +1,7 @@
+## 2.1.0
+
+* Add URL call back from iOS to Flutter by methodCall.method 'handle_url'
+  
 ## 2.0.1
 
 * Set iOS platform version to 10

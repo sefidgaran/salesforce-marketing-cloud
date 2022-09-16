@@ -35,7 +35,7 @@ Future handler(MethodCall methodCall) async {
   switch (methodCall.method) {
     case 'handle_url':
       var url = methodCall.arguments['url'];
-      // the url is accessible here and can be processed
+      // the url is accessible here and can be processed (Applicable to iOS Only)
       return null;
   }
 }
