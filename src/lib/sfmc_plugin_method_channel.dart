@@ -10,6 +10,11 @@ class MethodChannelSfmcPlugin extends SfmcPluginPlatform {
   final methodChannel = const MethodChannel('sfmc_plugin');
 
   @override
+  setHandler(Future<dynamic> Function(MethodCall call)? handler) {
+    methodChannel.setMethodCallHandler(handler);
+  }
+
+  @override
   Future<bool?> initialize(
       {String? appId,
       String? accessToken,

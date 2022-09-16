@@ -5,13 +5,15 @@ import Foundation
 
 public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandlingDelegate, MarketingCloudSDKEventDelegate {
     
+    static var channel:FlutterMethodChannel?
+
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let channel = FlutterMethodChannel(name: "sfmc_plugin", binaryMessenger: registrar.messenger())
+        channel = FlutterMethodChannel(name: "sfmc_plugin", binaryMessenger: registrar.messenger())
         let instance = SwiftSfmcPlugin()
-        registrar.addMethodCallDelegate(instance, channel: channel)
+        registrar.addMethodCallDelegate(instance, channel: channel!)
         registrar.addApplicationDelegate(instance)
     }
-    
+
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         if call.method == "initialize" {
             var isInitSuccessful = false;
@@ -21,12 +23,12 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
             let mid = args["mid"] as? String
             let sfmcURL = args["sfmcURL"] as? String
             let delayRegistration = args["delayRegistration"] as? Bool
-            
+
             if appId == nil || accessToken == nil || mid == nil || sfmcURL == nil {
                 result(false)
                 return
             }
-            
+
             setupSFMC(
                 appId: appId!,
                 accessToken: accessToken!,
@@ -52,17 +54,17 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
             result(setContactKey(contactKey: cKey!))
         }else if call.method == "getContactKey" {
             let cKey : String? = getContactKey()
-            
+
             result(cKey)
         }else if call.method == "addTag" {
-            
+
             guard let args = call.arguments as? [String : Any] else {return}
             let tag = args["tag"] as! String?
             if tag == nil {
                 result(false)
                 return
             }
-            
+
             result(setTag(tag: tag!))
         } else if call.method == "removeTag" {
             guard let args = call.arguments as? [String : Any] else {return}
@@ -74,11 +76,11 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
             result(removeTag(tag:tag!))
         }
     }
-    
+
     public func setupSFMC(appId: String, accessToken: String, mid: String, sfmcURL: String, delayRegistration: Bool?, onDone: (_ result: Bool, _ message: String?, _ code: Int?) -> Void) {
         var success : Bool = false
         MarketingCloudSDK.sharedInstance().sfmc_tearDown()
-        
+
         let builder = MarketingCloudSDKConfigBuilder()
             .sfmc_setApplicationId(appId)
             .sfmc_setAccessToken(accessToken)
@@ -86,34 +88,34 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
             .sfmc_setMid(mid)
             .sfmc_setDelayRegistration(untilContactKeyIsSet: (delayRegistration ?? false) as NSNumber)
             .sfmc_build()!
-        
+
         MarketingCloudSDK.sharedInstance().sfmc_setURLHandlingDelegate(self)
         MarketingCloudSDK.sharedInstance().sfmc_setEventDelegate(self)
-        
+
         do {
             try MarketingCloudSDK.sharedInstance().sfmc_configure(with:builder)
             success = true;
             onDone(true, nil, nil);
         } catch let error as NSError {
-            
+
             onDone(false, error.localizedDescription, error.code);
         }
-        
+
         if success == true {
             // Handle URL stuff
-            
+
             #if DEBUG
             MarketingCloudSDK.sharedInstance().sfmc_setDebugLoggingEnabled(true)
             #endif
             MarketingCloudSDK.sharedInstance().sfmc_setURLHandlingDelegate(self)
-            
+
             DispatchQueue.main.async {
                 if #available(iOS 10.0, *) {
                     // Set the UNUserNotificationCenterDelegate to a class adhering to thie protocol.
                     // In this exmple, the AppDelegate class adheres to the protocol (see below)
                     // and handles Notification Center delegate methods from iOS.
                     UNUserNotificationCenter.current().delegate = self
-                    
+
                     // Request authorization from the user for push notification alerts.
                     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {(_ granted: Bool, _ error: Error?) -> Void in
                         if error == nil {
@@ -127,24 +129,24 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
                 }
                 // In any case, your application should register for remote notifications *each time* your application
                 // launches to ensure that the push token used by MobilePush (for silent push) is updated if necessary.
-                
+
                 // Registering in this manner does *not* mean that a user will see a notification - it only means
                 // that the application will receive a unique push token from iOS.
                 UIApplication.shared.registerForRemoteNotifications()
-                
+
             }}
     }
-    
+
     func setContactKey(contactKey: String) -> Bool? {
         MarketingCloudSDK.sharedInstance().sfmc_setContactKey(contactKey)
         return true
     }
-    
+
     func getContactKey()-> String?{
         let contactKey: String? = MarketingCloudSDK.sharedInstance().sfmc_contactKey()
         return contactKey
     }
-    
+
     func setTag(tag: String) -> Bool {
         MarketingCloudSDK.sharedInstance().sfmc_addTag(tag)
         return true
@@ -153,29 +155,13 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
         MarketingCloudSDK.sharedInstance().sfmc_removeTag(tag)
         return true
     }
-    
+
     /*
      * URL Handling
      */
-    
+
     public func sfmc_handle(_ url: URL, type: String) {
-        if UIApplication.shared.canOpenURL(url) == true {
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url, options: [:], completionHandler: { success in
-                    if success {
-                        print("url \(url) opened successfully")
-                    } else {
-                        print("url \(url) could not be opened")
-                    }
-                })
-            } else {
-                if UIApplication.shared.openURL(url) == true {
-                    print("url \(url) opened successfully")
-                } else {
-                    print("url \(url) could not be opened")
-                }
-            }
-        }
+        SwiftSfmcPlugin.channel!.invokeMethod("handle_url" , arguments:  [ "url":url.absoluteString])
     }
     
     /*

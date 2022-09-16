@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'sfmc_plugin_platform_interface.dart';
 
 class SfmcPlugin {
@@ -16,6 +17,10 @@ class SfmcPlugin {
         sfmcURL: sfmcURL,
         senderId: senderId,
         delayRegistration: delayRegistration);
+  }
+
+  setHandler(Future<dynamic> Function(MethodCall call)? handler) {
+    SfmcPluginPlatform.instance.setHandler(handler);
   }
 
   /// To Set Contact Key
