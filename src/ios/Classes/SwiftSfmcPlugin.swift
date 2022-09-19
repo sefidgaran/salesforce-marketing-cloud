@@ -10,12 +10,12 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
     public static func register(with registrar: FlutterPluginRegistrar) {
         channel = FlutterMethodChannel(name: "sfmc_plugin", binaryMessenger: registrar.messenger())
         let instance = SwiftSfmcPlugin()
-        registrar.addApplicationDelegate(instance)
         registrar.addMethodCallDelegate(instance, channel: channel!)
+        registrar.addApplicationDelegate(instance)
     }
 
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        if call.method == "initialize" {            
+        if call.method == "initialize" {
             var isInitSuccessful = false;
             guard let args = call.arguments as? [String : Any] else {return}
             let appId = args["appId"] as? String
@@ -44,7 +44,6 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
                     }
                     result(isInitSuccessful)
                 })
-            
         }else if call.method == "setContactKey" {
             guard let args = call.arguments as? [String : Any] else {return}
             let cKey = args["contactKey"] as! String?
@@ -80,7 +79,8 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
 
     public func setupSFMC(appId: String, accessToken: String, mid: String, sfmcURL: String, delayRegistration: Bool?, onDone: (_ result: Bool, _ message: String?, _ code: Int?) -> Void) {
         var success : Bool = false
-        
+        MarketingCloudSDK.sharedInstance().sfmc_tearDown()
+
         let builder = MarketingCloudSDKConfigBuilder()
             .sfmc_setApplicationId(appId)
             .sfmc_setAccessToken(accessToken)
@@ -89,35 +89,26 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
             .sfmc_setDelayRegistration(untilContactKeyIsSet: (delayRegistration ?? false) as NSNumber)
             .sfmc_build()!
 
+        MarketingCloudSDK.sharedInstance().sfmc_setURLHandlingDelegate(self)
+        MarketingCloudSDK.sharedInstance().sfmc_setEventDelegate(self)
+
         do {
             try MarketingCloudSDK.sharedInstance().sfmc_configure(with:builder)
             success = true;
             onDone(true, nil, nil);
         } catch let error as NSError {
+
             onDone(false, error.localizedDescription, error.code);
         }
 
         if success == true {
-            // The SDK has been fully configured and is ready for use!
-            
-            // Enable logging for debugging. Not recommended for production apps, as significant data
-            // about MobilePush will be logged to the console.
+            // Handle URL stuff
+
             #if DEBUG
             MarketingCloudSDK.sharedInstance().sfmc_setDebugLoggingEnabled(true)
             #endif
-
-            // Set the MarketingCloudSDKURLHandlingDelegate to a class adhering to the protocol.
-            // In this example, the AppDelegate class adheres to the protocol
-            // and handles URLs passed back from the SDK.
-            // For more information, see https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/sdk-implementation/implementation-urlhandling.html
             MarketingCloudSDK.sharedInstance().sfmc_setURLHandlingDelegate(self)
 
-            // Set the MarketingCloudSDKEventDelegate to a class adhering to the protocol.
-            // In this example, the AppDelegate class adheres to the protocol (see below)
-            // and handles In-App Message delegate methods from the SDK.
-            MarketingCloudSDK.sharedInstance().sfmc_setEventDelegate(self)
-
-            // Make sure to dispatch this to the main thread, as UNUserNotificationCenter will present UI.
             DispatchQueue.main.async {
                 if #available(iOS 10.0, *) {
                     // Set the UNUserNotificationCenterDelegate to a class adhering to thie protocol.
@@ -142,6 +133,7 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
                 // Registering in this manner does *not* mean that a user will see a notification - it only means
                 // that the application will receive a unique push token from iOS.
                 UIApplication.shared.registerForRemoteNotifications()
+
             }}
     }
 
@@ -159,12 +151,11 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
         MarketingCloudSDK.sharedInstance().sfmc_addTag(tag)
         return true
     }
-    
     func removeTag(tag: String) -> Bool {
         MarketingCloudSDK.sharedInstance().sfmc_removeTag(tag)
         return true
     }
-    
+
     /*
      * URL Handling
      */
