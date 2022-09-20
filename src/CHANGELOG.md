@@ -1,3 +1,9 @@
+## 2.1.1
+
+* Cleaning code in iOS SwiftSfmcPlugin.swift
+* Add UIBackgroundModes keys into example iOS info.plist
+* Update readme
+  
 ## 2.1.0
 
 * Add URL call back from iOS to Flutter by methodCall.method 'handle_url'

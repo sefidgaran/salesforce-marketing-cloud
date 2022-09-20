@@ -61,6 +61,16 @@ MC_SERVER_URL="<YOUR_SFMC_URL>"
 
 Please follow the [Provision for Push](https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/get-started/get-started-provision.html).
 
+Note: Please add UIBackgroundModes keys into your info.plist file as below:
+
+```plist
+<key>UIBackgroundModes</key>
+	<array>
+    	<string>fetch</string>
+    	<string>remote-notification</string>
+	</array>
+```
+
 ## Use Flutter Plugin
 
 The first step is initializing the SFMC plugin with credential information (applies to iOS only, for Android please refer to setup Android section). 
