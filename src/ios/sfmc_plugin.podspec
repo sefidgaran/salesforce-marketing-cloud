@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'sfmc_plugin'
-  s.version          = '2.1.2'
+  s.version          = '2.2.0'
   s.summary          = 'SFMC Flutter plugin project.'
   s.description      = <<-DESC
   MarketingCloudSDK - MobilePush SDK for Flutter.

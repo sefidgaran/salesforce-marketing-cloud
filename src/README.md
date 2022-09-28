@@ -58,10 +58,12 @@ MC_MID="<YOUR_SFMC_MID>"
 MC_SERVER_URL="<YOUR_SFMC_URL>"
 ```
 ## Setup iOS 
+
+###  Provision for Push
 Please follow the [Provision for Push](https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/get-started/get-started-provision.html).
 
+### Update info.plist
 Note: Please add UIBackgroundModes keys into your info.plist file as below:
-###  Provision for Push
 
 ```plist
 <key>UIBackgroundModes</key>

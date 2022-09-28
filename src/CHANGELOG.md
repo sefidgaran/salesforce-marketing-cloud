@@ -1,3 +1,7 @@
+## 2.2.0
+
+* Handle Multiple Push SDKs (push notifications) in iOS
+
 ## 2.1.2
 
 * Revert cleaning code in iOS SwiftSfmcPlugin.swift changes in version 2.1.1 to fix in app message bug
