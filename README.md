@@ -72,7 +72,7 @@ Note: Please add UIBackgroundModes keys into your info.plist file as below:
 ```
 
 ### Setup `UNUserNotificationCenter` delegate
-Add the following lines to the `application` method in the AppDelegate.m/AppDelegate.swift file of your iOS project. See an example of this [here](https://github.com/MaikuB/flutter_local_notifications/blob/master/flutter_local_notifications/example/ios/Runner/AppDelegate.swift).
+Add the following lines to the `application` method in the AppDelegate.m/AppDelegate.swift file of your iOS project.
 
 Objective-C:
 ```objc
