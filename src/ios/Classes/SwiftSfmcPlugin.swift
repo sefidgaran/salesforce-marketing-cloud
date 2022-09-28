@@ -111,11 +111,6 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
 
             DispatchQueue.main.async {
                 if #available(iOS 10.0, *) {
-                    // Set the UNUserNotificationCenterDelegate to a class adhering to thie protocol.
-                    // In this exmple, the AppDelegate class adheres to the protocol (see below)
-                    // and handles Notification Center delegate methods from iOS.
-                    UNUserNotificationCenter.current().delegate = self
-
                     // Request authorization from the user for push notification alerts.
                     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {(_ granted: Bool, _ error: Error?) -> Void in
                         if error == nil {
@@ -193,15 +188,23 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
     // The method will be called on the delegate when the user responded to the notification by opening the application, dismissing the notification or choosing a UNNotificationAction. The delegate must be set before the application returns from applicationDidFinishLaunching:.
     @available(iOS 10.0, *)
     public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        // Required: tell the MarketingCloudSDK about the notification. This will collect MobilePush analytics
-        // and process the notification on behalf of your application.
-        MarketingCloudSDK.sharedInstance().sfmc_setNotificationRequest(response.notification.request)
-        completionHandler()
+        let userInfo = response.notification.request.content.userInfo
+        // Check _sid to "SFMC" to make sure we only handle messages from SFMC
+        if (userInfo["_sid"] as? String) == "SFMC" {
+            // Required: tell the MarketingCloudSDK about the notification. This will collect MobilePush analytics
+            // and process the notification on behalf of your application.
+            MarketingCloudSDK.sharedInstance().sfmc_setNotificationRequest(response.notification.request)
+            completionHandler()
+        }
     }
 
     // The method will be called on the delegate only if the application is in the foreground. If the method is not implemented or the handler is not called in a timely manner then the notification will not be presented. The application can choose to have the notification presented as a sound, badge, alert and/or in the notification list. This decision should be based on whether the information in the notification is otherwise visible to the user.
     @available(iOS 10.0, *)
     public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler(.alert)
+        let userInfo = notification.request.content.userInfo
+        // Check _sid to "SFMC" to make sure we only handle messages from SFMC
+        if (userInfo["_sid"] as? String) == "SFMC" {
+            completionHandler(.alert)
+        }
     }
 }
