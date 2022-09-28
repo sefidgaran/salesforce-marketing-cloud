@@ -58,7 +58,7 @@ MC_MID="<YOUR_SFMC_MID>"
 MC_SERVER_URL="<YOUR_SFMC_URL>"
 ```
 ## Setup iOS 
-
+### Update `info.plist`
 Please follow the [Provision for Push](https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/get-started/get-started-provision.html).
 
 Note: Please add UIBackgroundModes keys into your info.plist file as below:
@@ -71,6 +71,22 @@ Note: Please add UIBackgroundModes keys into your info.plist file as below:
 	</array>
 ```
 
+### Setup `UNUserNotificationCenter` delegate
+Add the following lines to the `application` method in the AppDelegate.m/AppDelegate.swift file of your iOS project. See an example of this [here](https://github.com/MaikuB/flutter_local_notifications/blob/master/flutter_local_notifications/example/ios/Runner/AppDelegate.swift).
+
+Objective-C:
+```objc
+if (@available(iOS 10.0, *)) {
+  [UNUserNotificationCenter currentNotificationCenter].delegate = (id<UNUserNotificationCenterDelegate>) self;
+}
+```
+
+Swift:
+```swift
+if #available(iOS 10.0, *) {
+  UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
+}
+```
 ## Use Flutter Plugin
 
 The first step is initializing the SFMC plugin with credential information (applies to iOS only, for Android please refer to setup Android section). 
