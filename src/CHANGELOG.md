@@ -1,3 +1,7 @@
+## 2.2.1
+
+* Add setPushEnabled for iOS
+
 ## 2.2.0
 
 * Handle Multiple Push SDKs (push notifications) in iOS

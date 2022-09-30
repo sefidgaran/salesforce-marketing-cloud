@@ -74,6 +74,14 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
                 return
             }
             result(removeTag(tag:tag!))
+        } else if call.method == "setPushEnabled" {
+            guard let args = call.arguments as? [String : Any] else {return}
+            let isEnabled = args["isEnabled"] as! Bool?
+            if isEnabled == nil {
+                result(false)
+                return
+            }
+            result(setPushEnabled(isEnabled: isEnabled!))
         }
     }
 
@@ -148,6 +156,10 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin, MarketingCloudSDKURLHandl
     }
     func removeTag(tag: String) -> Bool {
         MarketingCloudSDK.sharedInstance().sfmc_removeTag(tag)
+        return true
+    }
+    func setPushEnabled(isEnabled: Bool) -> Bool {
+        MarketingCloudSDK.sharedInstance().sfmc_setPushEnabled(isEnabled)
         return true
     }
 
