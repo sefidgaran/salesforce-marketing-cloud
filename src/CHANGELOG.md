@@ -1,3 +1,9 @@
+## 3.0.0
+
+* Migrate iOS MarketingCloudSDK to 8.0.8 and SFMCSdk 1.0.6 - iOS Only
+* Fix iOS SFMC SDK initialization - iOS Only
+* Fix iOS receive push notification data when app is killed - iOS Only
+  
 ## 2.2.1
 
 * Add setPushEnabled for iOS

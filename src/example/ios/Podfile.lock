@@ -1,9 +1,12 @@
 PODS:
   - Flutter (1.0.0)
-  - MarketingCloudSDK (7.6.0)
-  - sfmc_plugin (2.0.1):
+  - MarketingCloud-SFMCSdk (1.0.6)
+  - MarketingCloudSDK (8.0.8):
+    - MarketingCloud-SFMCSdk (~> 1.0.6)
+  - sfmc_plugin (3.0.0):
     - Flutter
-    - MarketingCloudSDK (~> 7.6)
+    - MarketingCloud-SFMCSdk (= 1.0.6)
+    - MarketingCloudSDK (= 8.0.8)
   - shared_preferences_ios (0.0.1):
     - Flutter
   - uni_links (0.0.1):
@@ -17,6 +20,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - MarketingCloud-SFMCSdk
     - MarketingCloudSDK
 
 EXTERNAL SOURCES:
@@ -30,9 +34,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/uni_links/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
-  MarketingCloudSDK: 8a81c3d08499e69c27bc32798fc81a68a51e2e67
-  sfmc_plugin: 996dbc02c0b412c12b54b6ed031bb74dda9b908b
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  MarketingCloud-SFMCSdk: ae74604b0294527865fd4daa640698e3b1c13e1b
+  MarketingCloudSDK: 4d18e897dab4aeb676ffa03fbd814ee47d41c9d3
+  sfmc_plugin: 22244f8a52647b1f72db28384a8dcaa59e185474
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
   uni_links: d97da20c7701486ba192624d99bffaaffcfc298a
 
