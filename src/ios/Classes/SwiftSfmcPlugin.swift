@@ -135,11 +135,13 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin {
     }
 
     func setProfileAttribute(key: String, value: String) -> Bool {
-        return SFMCSdk.identity.setProfileAttribute(key, value)
+        SFMCSdk.identity.setProfileAttribute(key, value)
+        return true
     }
 
     func clearProfileAttribute(key: String) -> Bool {
-        return SFMCSdk.identity.setProfileAttributes([[key: ""]])
+        SFMCSdk.identity.setProfileAttribute(key, "")
+        return true
     }
     
     func setPushEnabled(isEnabled: Bool) -> Bool {
