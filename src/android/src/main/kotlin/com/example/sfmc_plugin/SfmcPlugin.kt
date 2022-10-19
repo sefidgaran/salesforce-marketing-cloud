@@ -106,6 +106,7 @@ class SfmcPlugin : FlutterPlugin, MethodCallHandler {
                 }
             }
             "setProfileAttribute" -> {
+                var isSuccessful: Boolean
                 val attributeKey: String? = call.argument<String?>("key")
                 val attributeValue: String? = call.argument<String?>("value")
                 if (attributeKey == null || attributeKey == "") {
@@ -116,33 +117,32 @@ class SfmcPlugin : FlutterPlugin, MethodCallHandler {
                     result.error("Attribute Value is not valid", "Attribute Value is not valid", "Attribute Value is not valid");
                     return
                 }
-                try {
+                isSuccessful = try {
                     SFMCSdk.requestSdk { sdk ->
-                        sdk.identity.run {
-                            setProfileAttribute(attributeKey, attributeValue)
-                            result.success(true)
-                        }
+                        sdk.identity.setProfileAttribute(attributeKey, attributeValue)
                     }
+                    true
                 } catch (e: RuntimeException) {
-                    result.error(e.toString(), e.toString(), e.toString())
+                    false
                 }
+                result.success(isSuccessful)
             }
             "clearProfileAttribute" -> {
+                var isSuccessful: Boolean
                 val attributeKey: String? = call.argument<String?>("key")
                 if (attributeKey == null || attributeKey == "") {
                     result.error("Attribute Key is not valid", "Attribute Key is not valid", "Attribute Key is not valid");
                     return
                 }
-                try {
+                isSuccessful = try {
                     SFMCSdk.requestSdk { sdk ->
-                        sdk.identity.run {
-                            clearProfileAttribute(attributeKey)
-                            result.success(true)
-                        }
+                        sdk.identity.clearProfileAttribute(attributeKey)
                     }
+                    true
                 } catch (e: RuntimeException) {
-                    result.error(e.toString(), e.toString(), e.toString())
+                    false
                 }
+                result.success(isSuccessful)
             }
             "setPushEnabled" -> {
                 val enablePush: Boolean = call.argument<Boolean>("isEnabled") as Boolean
