@@ -75,6 +75,23 @@ class MethodChannelSfmcPlugin extends SfmcPluginPlatform {
   }
 
   @override
+  Future<bool?> setProfileAttribute(String key, String value) async {
+    final bool? result = await methodChannel.invokeMethod('setProfileAttribute', {
+      "key": key,
+      "value": value,
+    });
+    return result;
+  }
+  
+  @override
+  Future<bool?> clearProfileAttribute(String key) async {
+    final bool? result = await methodChannel.invokeMethod('clearProfileAttribute', {
+      "key": key,
+    });
+    return result;
+  }
+
+  @override
   Future<bool?> setPushEnabled(bool? enabled) async {
     final bool? result = await methodChannel.invokeMethod('setPushEnabled', {
       "isEnabled": enabled ?? true,

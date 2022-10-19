@@ -105,6 +105,45 @@ class SfmcPlugin : FlutterPlugin, MethodCallHandler {
                     result.error(e.toString(), e.toString(), e.toString())
                 }
             }
+            "setProfileAttribute" -> {
+                val attributeKey: String? = call.argument<String?>("key")
+                val attributeValue: String? = call.argument<String?>("value")
+                if (attributeKey == null || attributeKey == "") {
+                    result.error("Attribute Key is not valid", "Attribute Key is not valid", "Attribute Key is not valid");
+                    return
+                }
+                if (attributeValue == null || attributeValue == "") {
+                    result.error("Attribute Value is not valid", "Attribute Value is not valid", "Attribute Value is not valid");
+                    return
+                }
+                try {
+                    SFMCSdk.requestSdk { sdk ->
+                        sdk.identity.run {
+                            setProfileAttribute(attributeKey, attributeValue)
+                            result.success(true)
+                        }
+                    }
+                } catch (e: RuntimeException) {
+                    result.error(e.toString(), e.toString(), e.toString())
+                }
+            }
+            "clearProfileAttribute" -> {
+                val attributeKey: String? = call.argument<String?>("key")
+                if (attributeKey == null || attributeKey == "") {
+                    result.error("Attribute Key is not valid", "Attribute Key is not valid", "Attribute Key is not valid");
+                    return
+                }
+                try {
+                    SFMCSdk.requestSdk { sdk ->
+                        sdk.identity.run {
+                            clearProfileAttribute(attributeKey)
+                            result.success(true)
+                        }
+                    }
+                } catch (e: RuntimeException) {
+                    result.error(e.toString(), e.toString(), e.toString())
+                }
+            }
             "setPushEnabled" -> {
                 val enablePush: Boolean = call.argument<Boolean>("isEnabled") as Boolean
                 if (enablePush) {

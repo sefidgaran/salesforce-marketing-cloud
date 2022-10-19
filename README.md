@@ -112,6 +112,16 @@ The second step is setting your sfmc contact key which is a unique client id in 
 await SfmcPlugin().setContactKey('<Uniquely Identifying Key>');
 ```
 
+### Attributes
+
+You can use attributes to segment your audience and personalize your messages. Before you can use attributes, create them in your MobilePush account. Attributes may only be set or cleared by the SDK. See the [Reserved Words](https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/sdk-implementation/device-contact-registration.html#reserved-words) section for a list of attribute keys that can’t be modified by the SDK or your application.
+
+```dart
+await SfmcPlugin().setProfileAttribute("key", "value");
+
+await SfmcPlugin().clearProfileAttribute("key");
+```
+
 ## Contributions
 
 🍺 Pull requests are welcome!

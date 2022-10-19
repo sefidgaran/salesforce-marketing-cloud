@@ -42,6 +42,15 @@ class SfmcPlugin {
   /// To Get Tags
   Future<List<String>> getTags() => SfmcPluginPlatform.instance.getTags();
 
+  /// Set Profile Attribute
+  /// @param key - Key of the attribute
+  /// @param value - Value of the attribute
+  Future<bool?> setProfileAttribute(String key, String value) => SfmcPluginPlatform.instance.setProfileAttribute(key, value);
+
+  /// Clear Profile Attribute
+  /// @param key - Key of the attribute
+  Future<bool?> clearProfileAttribute(String key) => SfmcPluginPlatform.instance.clearProfileAttribute(key);
+
   /// To Enable/Disable Push Notification
   Future<bool?> setPushEnabled(bool? enabled) async =>
       SfmcPluginPlatform.instance.setPushEnabled(enabled);

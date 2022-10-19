@@ -1,3 +1,7 @@
+## 3.1.0
+
+* Add `setProfileAttribute` and `clearProfileAttribute` methods for both Android and iOS Platforms
+
 ## 3.0.0
 
 * Migrate iOS MarketingCloudSDK to 8.0.8 and SFMCSdk 1.0.6 - iOS Only
