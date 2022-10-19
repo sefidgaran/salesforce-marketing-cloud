@@ -1,3 +1,7 @@
+## 3.1.0
+
+* Fix iOS SFMC SDK initialization and remove redundant caching - iOS Only
+  
 ## 3.0.0
 
 * Migrate iOS MarketingCloudSDK to 8.0.8 and SFMCSdk 1.0.6 - iOS Only

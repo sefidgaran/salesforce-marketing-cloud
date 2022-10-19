@@ -12,14 +12,6 @@ import Foundation
 public class SwiftSfmcPlugin: NSObject, FlutterPlugin {
     static var channel:FlutterMethodChannel?
     var notificationUserInfo:[AnyHashable:Any]?
-    var userDefaults: UserDefaults?
-    private struct SfmcInitInfoCacheKeys {
-        let appId: String = "sfmc_appId"
-        let accessToken: String = "sfmc_accessToken"
-        let mid: String = "sfmc_mid"
-        let sfmcURL: String = "sfmc_sfmcURL"
-        let delayRegistration: String = "sfmc_delayRegistration"
-    }
     
     public static func register(with registrar: FlutterPluginRegistrar) {
         channel = FlutterMethodChannel(name: "sfmc_plugin", binaryMessenger: registrar.messenger())
@@ -28,61 +20,9 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin {
         registrar.addApplicationDelegate(instance)
     }
     
-    private func writeCache(key: String, value: Any){
-        userDefaults?.set(value, forKey: key)
-    }
-    
-    private func readCache<T>(key: String) -> T? {
-        return userDefaults?.value(forKey: key) as? T
-    }
-    
-    private func isSfmcSdkInitInfoAvailable() -> Bool {
-        if(readCache(key: SfmcInitInfoCacheKeys().appId) != nil &&
-           readCache(key: SfmcInitInfoCacheKeys().accessToken) != nil &&
-           readCache(key: SfmcInitInfoCacheKeys().mid) != nil &&
-           readCache(key: SfmcInitInfoCacheKeys().sfmcURL) != nil &&
-           readCache(key: SfmcInitInfoCacheKeys().delayRegistration) != nil){
-            return true
-        }
-        
-        return false
-    }
-    
-    @discardableResult
-    func configureSFMCSdk() -> Bool {
-        let appId : String? = readCache(key: SfmcInitInfoCacheKeys().appId)
-        let accessToken : String? = readCache(key: SfmcInitInfoCacheKeys().accessToken)
-        let mid  : String? =  readCache(key: SfmcInitInfoCacheKeys().mid)
-        let sfmcURL  : String? =  readCache(key: SfmcInitInfoCacheKeys().sfmcURL)
-        let delayRegistration  : Bool? =  readCache(key: SfmcInitInfoCacheKeys().delayRegistration)
-        
-        var isInitSuccesfull = false
-        
-        if appId == nil || accessToken == nil || mid == nil || sfmcURL == nil {
-            return false
-        }
-        
-        setupSFMC(
-            appId: appId!,
-            accessToken: accessToken!,
-            mid: mid!,
-            sfmcURL: sfmcURL!,
-            delayRegistration: delayRegistration ?? true,
-            onDone: { sfmcResult, message, code in
-                if (sfmcResult) {
-                    isInitSuccesfull = true
-                } else {
-                    isInitSuccesfull = false
-                }
-            })
-        
-        return isInitSuccesfull
-    }
-    
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         if call.method == "initialize" {
             var isInitSuccessful = false
-            var isSfmcSDKInitialised = false
             guard let args = call.arguments as? [String : Any] else {return}
             let appId = args["appId"] as? String
             let accessToken = args["accessToken"] as? String
@@ -95,18 +35,19 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin {
                 return
             }
             
-            isSfmcSDKInitialised = isSfmcSdkInitInfoAvailable()
-            
-            // Update Cache
-            writeCache(key: SfmcInitInfoCacheKeys().appId, value: appId!)
-            writeCache(key: SfmcInitInfoCacheKeys().accessToken, value: accessToken!)
-            writeCache(key: SfmcInitInfoCacheKeys().mid, value: mid!)
-            writeCache(key: SfmcInitInfoCacheKeys().sfmcURL, value: sfmcURL!)
-            writeCache(key: SfmcInitInfoCacheKeys().delayRegistration, value: delayRegistration as Any)
-            
-            if isSfmcSDKInitialised == false {
-                isInitSuccessful = self.configureSFMCSdk()
-            }
+            setupSFMC(
+                appId: appId!,
+                accessToken: accessToken!,
+                mid: mid!,
+                sfmcURL: sfmcURL!,
+                delayRegistration: delayRegistration ?? true,
+                onDone: { sfmcResult, message, code in
+                    if (sfmcResult) {
+                        isInitSuccessful = true
+                    } else {
+                        isInitSuccessful = false
+                    }
+                })
             
             result(isInitSuccessful)
         }else if call.method == "setContactKey" {
@@ -273,8 +214,6 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin {
     }
     
     public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [AnyHashable : Any] = [:]) -> Bool {
-        self.userDefaults = UserDefaults.standard
-        
         // When the app is terminated/killed state
         //    -> when a push notification is received
         //    -> launch the app from Push notification
@@ -287,7 +226,7 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin {
             self.notificationUserInfo = notification
         }
         
-        return configureSFMCSdk()
+        return true
     }
     
     // This is to set the notification object to SDK when the SDK is ready.
