@@ -54,11 +54,13 @@ abstract class SfmcPluginPlatform extends PlatformInterface {
   /// Set Profile Attribute
   /// @param key - Key of the attribute
   /// @param value - Value of the attribute
-  Future<bool?> setProfileAttribute(String key, String value) => _instance.setProfileAttribute(key, value);
+  Future<bool?> setProfileAttribute(String key, String value) =>
+      _instance.setProfileAttribute(key, value);
 
   /// Clear Profile Attribute
   /// @param key - Key of the attribute
-  Future<bool?> clearProfileAttribute(String key) => _instance.clearProfileAttribute(key);
+  Future<bool?> clearProfileAttribute(String key) =>
+      _instance.clearProfileAttribute(key);
 
   /// To Get Tags
   Future<List<String>> getTags() => _instance.getTags();

@@ -1,3 +1,7 @@
+## 3.2.1
+
+* Dart Format
+
 ## 3.2.0
 
 * Add `setProfileAttribute` and `clearProfileAttribute` methods for both Android and iOS Platforms
