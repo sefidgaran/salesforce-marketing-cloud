@@ -1,3 +1,7 @@
+## 3.2.0
+
+* Add `setProfileAttribute` and `clearProfileAttribute` methods for both Android and iOS Platforms
+
 ## 3.1.0
 
 * Fix iOS SFMC SDK initialization and remove redundant caching - iOS Only

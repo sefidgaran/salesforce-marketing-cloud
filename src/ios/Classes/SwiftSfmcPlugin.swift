@@ -80,6 +80,31 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin {
                 return
             }
             result(removeTag(tag:tag!))
+        }else if call.method == "setProfileAttribute" {
+            
+            guard let args = call.arguments as? [String : Any] else {return}
+            let key = args["key"] as! String?
+            let value = args["value"] as! String?
+
+            if key == nil {
+                result(false)
+                return
+            }
+            if value == nil {
+                result(false)
+                return
+            }
+            result(setProfileAttribute(key: key!, value: value!))
+        }else if call.method == "clearProfileAttribute" {
+            
+            guard let args = call.arguments as? [String : Any] else {return}
+            let key = args["key"] as! String?
+
+            if key == nil {
+                result(false)
+                return
+            }
+            result(clearProfileAttribute(key: key!))
         } else if call.method == "setPushEnabled" {
             guard let args = call.arguments as? [String : Any] else {return}
             let isEnabled = args["isEnabled"] as! Bool?
@@ -107,6 +132,16 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin {
     
     func removeTag(tag: String) -> Bool {
         return SFMCSdk.mp.removeTag(tag)
+    }
+
+    func setProfileAttribute(key: String, value: String) -> Bool {
+        SFMCSdk.identity.setProfileAttribute(key, value)
+        return true
+    }
+
+    func clearProfileAttribute(key: String) -> Bool {
+        SFMCSdk.identity.clearProfileAttribute(key: key)
+        return true
     }
     
     func setPushEnabled(isEnabled: Bool) -> Bool {
