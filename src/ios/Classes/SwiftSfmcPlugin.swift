@@ -140,7 +140,7 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin {
     }
 
     func clearProfileAttribute(key: String) -> Bool {
-        SFMCSdk.identity.setProfileAttribute(key, "")
+        SFMCSdk.identity.clearProfileAttribute(key: key)
         return true
     }
     
