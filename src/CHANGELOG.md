@@ -1,3 +1,8 @@
+## 3.3.0
+
+* Add Analytics, default = true
+* Fix iOS setDelayRegistrationUntilContactKeyIsSet, default = true
+
 ## 3.2.1
 
 * Dart Format

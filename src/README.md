@@ -103,7 +103,15 @@ The first step is initializing the SFMC plugin with credential information (appl
         sfmcURL:
             '<YOUR_SFMC_URL>',
         senderId: '<YOUR_FIREBASE_CLOUD_MESSAGING_SENDER_ID>',
-        delayRegistration: true);
+
+        /// Set delayRegistration on iOS only, 
+        /// delayRegistration on Android is by default true
+        delayRegistration: true,
+        
+        /// Set analytics on iOS only, 
+        /// analytics on Android is by default true
+        analytics: true,
+      );
 ```
 
 The second step is setting your sfmc contact key which is a unique client id in Salesforce Marketing Cloud.
