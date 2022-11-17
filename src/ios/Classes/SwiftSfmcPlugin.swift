@@ -29,6 +29,7 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin {
             let mid = args["mid"] as? String
             let sfmcURL = args["sfmcURL"] as? String
             let delayRegistration = args["delayRegistration"] as? Bool
+            let analytics = args["analytics"] as? Bool
             
             if appId == nil || accessToken == nil || mid == nil || sfmcURL == nil {
                 result(isInitSuccessful)
@@ -41,6 +42,7 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin {
                 mid: mid!,
                 sfmcURL: sfmcURL!,
                 delayRegistration: delayRegistration ?? true,
+                analytics: analytics ?? true,
                 onDone: { sfmcResult, message, code in
                     if (sfmcResult) {
                         isInitSuccessful = true
@@ -151,7 +153,7 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin {
     
     // MobilePush SDK: REQUIRED IMPLEMENTATION
     
-    public func setupSFMC(appId: String, accessToken: String, mid: String, sfmcURL: String, delayRegistration: Bool?, onDone: (_ result: Bool, _ message: String?, _ code: Int?) -> Void) {
+    public func setupSFMC(appId: String, accessToken: String, mid: String, sfmcURL: String, delayRegistration: Bool, analytics: Bool, onDone: (_ result: Bool, _ message: String?, _ code: Int?) -> Void) {
         
         // Enable logging for debugging early on. Debug level is not recommended for production apps, as significant data
         // about the MobilePush will be logged to the console.
@@ -188,6 +190,7 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin {
             .setMarketingCloudServerUrl(appEndpoint)
             .setMid(mid)
             .setDelayRegistrationUntilContactKeyIsSet(delayRegistration)
+            .setAnalyticsEnabled(analytics)
             .build()
         
         var isInitSuccessful = false;

@@ -48,12 +48,20 @@ class _MyHomePageState extends State<MyHomePage> {
   void onInit() async {
     SfmcPlugin().setHandler(handler);
     var isInitialized = await SfmcPlugin().initialize(
-        appId: '<YOUR_APP_ID>',
-        accessToken: '<YOUR_ACCESS_TOKEN>',
-        mid: '<YOUR_MID>',
-        sfmcURL: '<YOUR_SFMC_URL>',
-        senderId: '<YOUR_FIREBASE_CLOUD_MESSAGING_SENDER_ID>',
-        delayRegistration: true);
+      appId: '<YOUR_APP_ID>',
+      accessToken: '<YOUR_ACCESS_TOKEN>',
+      mid: '<YOUR_MID>',
+      sfmcURL: '<YOUR_SFMC_URL>',
+      senderId: '<YOUR_FIREBASE_CLOUD_MESSAGING_SENDER_ID>',
+
+      /// Set delayRegistration on iOS only,
+      /// delayRegistration on Android is by default true
+      delayRegistration: true,
+
+      /// Set analytics on iOS only,
+      /// analytics on Android is by default true
+      analytics: true,
+    );
 
     setState(() {
       initStatus = isInitialized;

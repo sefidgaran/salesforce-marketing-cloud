@@ -3,20 +3,24 @@ import 'sfmc_plugin_platform_interface.dart';
 
 class SfmcPlugin {
   /// To Initialize the SDK for iOS only
-  Future<bool?> initialize(
-      {String? appId,
-      String? accessToken,
-      String? mid,
-      String? sfmcURL,
-      String? senderId,
-      bool? delayRegistration}) {
+  Future<bool?> initialize({
+    String? appId,
+    String? accessToken,
+    String? mid,
+    String? sfmcURL,
+    String? senderId,
+    bool? delayRegistration,
+    bool? analytics,
+  }) {
     return SfmcPluginPlatform.instance.initialize(
-        appId: appId,
-        accessToken: accessToken,
-        mid: mid,
-        sfmcURL: sfmcURL,
-        senderId: senderId,
-        delayRegistration: delayRegistration);
+      appId: appId,
+      accessToken: accessToken,
+      mid: mid,
+      sfmcURL: sfmcURL,
+      senderId: senderId,
+      delayRegistration: delayRegistration,
+      analytics: analytics,
+    );
   }
 
   /// (Applicable to iOS only - pass URL to Flutter through 'handle_url' methodCall.method - refer to example)

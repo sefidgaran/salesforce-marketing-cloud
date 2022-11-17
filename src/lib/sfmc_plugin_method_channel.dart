@@ -15,13 +15,15 @@ class MethodChannelSfmcPlugin extends SfmcPluginPlatform {
   }
 
   @override
-  Future<bool?> initialize(
-      {String? appId,
-      String? accessToken,
-      String? mid,
-      String? sfmcURL,
-      String? senderId,
-      bool? delayRegistration}) async {
+  Future<bool?> initialize({
+    String? appId,
+    String? accessToken,
+    String? mid,
+    String? sfmcURL,
+    String? senderId,
+    bool? delayRegistration,
+    bool? analytics,
+  }) async {
     final bool? result = await methodChannel.invokeMethod('initialize', {
       "appId": appId,
       "accessToken": accessToken,
@@ -29,6 +31,7 @@ class MethodChannelSfmcPlugin extends SfmcPluginPlatform {
       "sfmcURL": sfmcURL,
       "senderId": senderId,
       "delayRegistration": delayRegistration,
+      "analytics": analytics,
     });
     return result;
   }
