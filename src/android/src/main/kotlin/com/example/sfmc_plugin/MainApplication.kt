@@ -17,6 +17,7 @@ class MainApplication : BaseApplication() {
             setMid(BuildConfig.MC_MID)
             setMarketingCloudServerUrl(BuildConfig.MC_SERVER_URL)
             setDelayRegistrationUntilContactKeyIsSet(true)
+            setAnalyticsEnabled(true)
             setUrlHandler(this@MainApplication)
             setNotificationCustomizationOptions(
                 NotificationCustomizationOptions.create { context, notificationMessage ->
