@@ -187,6 +187,7 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin {
             .setAccessToken(accessToken)
             .setMarketingCloudServerUrl(appEndpoint)
             .setMid(mid)
+            .setDelayRegistrationUntilContactKeyIsSet(delayRegistration)
             .build()
         
         var isInitSuccessful = false;
