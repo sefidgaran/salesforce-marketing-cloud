@@ -1,3 +1,7 @@
+## 3.3.1
+
+* Fix Android push notification open analytics
+  
 ## 3.3.0
 
 * Add Analytics, default = true

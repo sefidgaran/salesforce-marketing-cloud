@@ -28,14 +28,18 @@ class MainApplication : BaseApplication() {
                         R.drawable.ic_notification
                     )
                     builder.setContentIntent(
-                        PendingIntent.getActivity(
+                        NotificationManager.redirectIntentForAnalytics(
                             context,
-                            Random().nextInt(),
-                            Intent(Intent.ACTION_VIEW, Uri.parse(notificationMessage.url)),
-                            PendingIntent.FLAG_IMMUTABLE
-                        ),
+                            PendingIntent.getActivity(
+                                context,
+                                Random().nextInt(),
+                                Intent(Intent.ACTION_VIEW, Uri.parse(notificationMessage.url)),
+                                PendingIntent.FLAG_IMMUTABLE
+                            ),
+                            notificationMessage,
+                            true,
+                        )
                     )
-                    builder.setAutoCancel(true)
                 }
             )
         }
