@@ -178,7 +178,7 @@ public class SwiftSfmcPlugin: NSObject, FlutterPlugin {
         let appEndpoint = URL(string: sfmcURL)!
         
         // To override the Keycahin accessibility attribute
-        SFMCSdk.setKeychainAccessibleAttribute(accessibleAttribute: kSecAttrAccessibleWhenUnlockedThisDeviceOnly)
+        //SFMCSdk.setKeychainAccessibleAttribute(accessibleAttribute: kSecAttrAccessibleWhenUnlockedThisDeviceOnly)
         
         // To Override the Keychain Error to be considered fatal or not (Default value is true)
         SFMCSdk.setKeychainAccessErrorsAreFatal(errorsAreFatal: false)
